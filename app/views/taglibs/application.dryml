@@ -1,69 +1,72 @@
 <!-- Global taglib - these tags are shared across all subsites -->
-
 <include src="rapid" plugin="hobo"/>
-
 <include src="taglibs/auto/rapid/cards"/>
 <include src="taglibs/auto/rapid/pages"/>
 <include src="taglibs/auto/rapid/forms"/>
-
 <include gem="hobo-jquery"/>
 <include src="paperclip" plugin="paperclip_with_hobo"/>
-
 <set-theme name="clean"/>
-
 <extend tag="card" for="Task">
-  <old-card merge>
-    <append-body:>
-    <div class="users">
-      Assigned users: <repeat:users join=", "><a/></repeat><else>None</else>
-    </div>
-    </append-body:>
-  </old-card>
+	<old-card merge>
+		<append-body:>
+			<div class="users">
+				Assigned users:
+				<repeat:users join=", "><a/></repeat>
+					<else>
+						None
+					</else>
+			</div>
+		</append-body:>
+	</old-card>
 </extend>
-
 <extend tag="form" for="Task">
-  <old-form merge>
-    <field-list: fields="description, users"/>
-  </old-form>
+	<old-form merge>
+		<field-list: fields="description, users"/>
+	</old-form>
 </extend>
-
 <extend tag="card" for="ProjectMembership">
-  <old-card merge>
-    <body:>
-      <span>Contributor?</span>
-      <editor:contributor/>
-    </body:>
-  </old-card>
+	<old-card merge>
+		<body:>
+			<span>Contributor?</span>
+			<editor:contributor/>
+		</body:>
+	</old-card>
 </extend>
-
 <def tag="main-nav">
-  <navigation class="main-nav" merge-attrs>
-    <nav-item href="#{base_url}/">Home</nav-item>
-  </navigation>
+	<navigation class="main-nav" merge-attrs>
+		<nav-item href="#{base_url}/">
+			Home
+		</nav-item>
+	</navigation>
 </def>
-
 <extend tag="select-many">
-  <old-select-many merge hide="puff"/>
+	<old-select-many merge hide="puff"/>
 </extend>
-
 <extend tag="live-editor-innards">
-  <old-live-editor-innards merge hide="puff"/>
+	<old-live-editor-innards merge hide="puff"/>
 </extend>
-
 <extend tag="click-editor-innards">
-  <old-click-editor-innards merge hide="puff" show="&false" message="updating...">
-    <formlet: hide="&false" show="&false"/>
-  </old-click-editor-innards>
+	<old-click-editor-innards merge hide="puff" show="&false" message="updating...">
+		<formlet: hide="&false" show="&false"/>
+	</old-click-editor-innards>
+</extend>
+<extend tag="page">
+	<old-page merge>
+		<custom-scripts:>
+			<qunit-includes/>
+		</custom-scripts:>
+		<before-header:>
+			<qunit-banner/>
+		</before-header:>
+	</old-page>
 </extend>
 
-<extend tag="page">
-  <old-page merge>
-    <custom-scripts:>
-      <qunit-includes/>
-    </custom-scripts:>
-
-    <before-header:>
-      <qunit-banner/>
-    </before-header:>
-  </old-page>
+<extend tag="form" for="Thing">
+	<old-form merge>
+		<field-list: fields="name, abobs">
+			<abobs-view:>
+				<editor/>
+			</abobs-view>
+		</field-list:>
+	</old-form>
 </extend>
