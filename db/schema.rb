@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111123020948) do
+ActiveRecord::Schema.define(:version => 20120109141534) do
+
+  create_table "abobs", :force => true do |t|
+    t.string   "name"
+    t.string   "name2"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "thing_id"
+  end
+
+  add_index "abobs", ["thing_id"], :name => "index_abobs_on_thing_id"
 
   create_table "bars", :force => true do |t|
     t.string  "name"
@@ -129,6 +139,12 @@ ActiveRecord::Schema.define(:version => 20111123020948) do
   end
 
   add_index "tasks", ["story_id"], :name => "index_tasks_on_story_id"
+
+  create_table "things", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "crypted_password",          :limit => 40
