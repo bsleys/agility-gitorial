@@ -60,13 +60,22 @@
 		</before-header:>
 	</old-page>
 </extend>
-
 <extend tag="form" for="Thing">
 	<old-form merge>
 		<field-list: fields="name, abobs">
 			<abobs-view:>
 				<editor/>
-			</abobs-view>
+				</abobs-view>
+		</field-list:>
+	</old-form>
+</extend>
+
+<extend tag="form" for="Abob">
+	<old-form merge>
+		<field-list: fields="name, name2, thing">
+			<thing-view:>
+				<select-one-or-new-dialog><field-list: fields="name"/></select-one-or-new-dialog>
+			</thing-view:>
 		</field-list:>
 	</old-form>
 </extend>
