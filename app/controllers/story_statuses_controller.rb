@@ -5,9 +5,12 @@ class StoryStatusesController < ApplicationController
   auto_actions :write_only, :new, :index
 
   index_action :index2, :index3, :index4
-
+  
   def create
     hobo_create do
+      if request.xhr?
+        self.this = Story.new
+      end
       if valid?
         respond_to do |wants|
           wants.html { redirect_after_submit }
@@ -18,7 +21,7 @@ class StoryStatusesController < ApplicationController
         end
       else
         respond_to do |wants|
-          # errors is used by the translation helper, ht, below.
+        # errors is used by the translation helper, ht, below.
           errors = this.errors.full_messages.join("\n")
           wants.html { re_render_form(new_action) }
           wants.js   { render(:status => 500,

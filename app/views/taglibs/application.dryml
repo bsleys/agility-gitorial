@@ -79,3 +79,13 @@
 		</field-list:>
 	</old-form>
 </extend>
+
+<extend tag="form" for="Story">
+	<old-form merge>
+		<field-list: fields="title, body, project, status, tasks">
+			<status-view:>
+				<select-one-or-new-dialog/>
+			</status-view:>
+		</field-list:>
+	</old-form>
+</extend>
